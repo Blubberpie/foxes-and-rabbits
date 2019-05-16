@@ -1,6 +1,5 @@
 package io.muzoo.ooc.ecosystems;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.awt.Color;
 
@@ -12,12 +11,6 @@ import java.awt.Color;
  * @version 2002.10.28
  */
 public class Simulator {
-
-    // The probabilities animals will be created in any given grid positions.
-    private static Map<Class, Double> creationProbabilities = new LinkedHashMap<Class, Double>() {{
-       put(Fox.class, 0.02);
-       put(Rabbit.class, 0.08);
-    }};
 
     // The private static final variables represent 
     // configuration information for the simulation.
@@ -141,24 +134,10 @@ public class Simulator {
      * @param field The field to be populated.
      */
     private void populate(Field field) {
-        Random rand = new Random();
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
-                for(Map.Entry<Class, Double> entry: creationProbabilities.entrySet()){
-                    Class species = entry.getKey();
-                    Double creationProbability = entry.getValue();
-                    if(rand.nextDouble() <= creationProbability){
-                        try {
-                            Animal animal = (Animal) species.getConstructor(boolean.class).newInstance(true);
-                            animals.add(animal);
-                            animal.setLocation(row, col);
-                            field.place(animal, row, col);
-                        }catch(NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException ex) {
-                            ex.printStackTrace();
-                        }
-                    } // else leave the location empty
-                }
+                AnimalFactory.createAllAnimals(field, animals, row, col);
             }
         }
         Collections.shuffle(animals);

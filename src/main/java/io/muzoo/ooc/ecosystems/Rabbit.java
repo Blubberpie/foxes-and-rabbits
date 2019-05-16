@@ -42,11 +42,7 @@ public class Rabbit extends Animal{
         if (isAlive()) {
             int births = breed(rand, BREEDING_AGE, BREEDING_PROBABILITY, MAX_LITTER_SIZE);
             for (int b = 0; b < births; b++) {
-                Rabbit newRabbit = new Rabbit(false);
-                newAnimals.add(newRabbit);
-                Location loc = updatedField.randomAdjacentLocation(getLocation());
-                newRabbit.setLocation(loc);
-                updatedField.place(newRabbit, loc);
+                AnimalFactory.createAnimal(Rabbit.class, updatedField, newAnimals, getLocation());
             }
             Location newLocation = updatedField.freeAdjacentLocation(getLocation());
             // Only transfer to the updated field if there was a free location
