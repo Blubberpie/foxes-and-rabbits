@@ -1,10 +1,7 @@
 package io.muzoo.ooc.ecosystems;
 
-import java.util.Random;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Collections;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 import java.awt.Color;
 
 /**
@@ -15,16 +12,19 @@ import java.awt.Color;
  * @version 2002.10.28
  */
 public class Simulator {
+
+    // The probabilities animals will be created in any given grid positions.
+    private static Map<Class, Double> creationProbabilities = new LinkedHashMap<Class, Double>() {{
+       put(Fox.class, 0.02);
+       put(Rabbit.class, 0.08);
+    }};
+
     // The private static final variables represent 
     // configuration information for the simulation.
     // The default width for the grid.
     private static final int DEFAULT_WIDTH = 50;
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 50;
-    // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
-    // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;
 
     // The list of animals in the field
     private List<Animal> animals;
@@ -145,18 +145,20 @@ public class Simulator {
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
-                if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Fox fox = new Fox(true);
-                    animals.add(fox);
-                    fox.setLocation(row, col);
-                    field.place(fox, row, col);
-                } else if (rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Rabbit rabbit = new Rabbit(true);
-                    animals.add(rabbit);
-                    rabbit.setLocation(row, col);
-                    field.place(rabbit, row, col);
+                for(Map.Entry<Class, Double> entry: creationProbabilities.entrySet()){
+                    Class species = entry.getKey();
+                    Double creationProbability = entry.getValue();
+                    if(rand.nextDouble() <= creationProbability){
+                        try {
+                            Animal animal = (Animal) species.getConstructor(boolean.class).newInstance(true);
+                            animals.add(animal);
+                            animal.setLocation(row, col);
+                            field.place(animal, row, col);
+                        }catch(NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException ex) {
+                            ex.printStackTrace();
+                        }
+                    } // else leave the location empty
                 }
-                // else leave the location empty.
             }
         }
         Collections.shuffle(animals);
