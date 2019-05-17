@@ -15,7 +15,7 @@ public class LifeFormHandler {
         put(Rabbit.class, 1-0.2);
         put(Fox.class, 1-0.06);
         put(Tiger.class, 1-0.04);
-        put(Hunter.class, 1-0.0005);
+        put(Hunter.class, 1-0.00035);
     }};
 
     public static void createAllLife(Field field, List<Animal> animals, List<Actor> actors, int row, int col){
