@@ -62,21 +62,4 @@ public class Fox extends Carnivore{
             }
         }
     }
-
-    /**
-     * Tell the fox to look for rabbits adjacent to its current location.
-     *
-     * @param field    The field in which it must look.
-     * @param location Where in the field it is located.
-     * @return Where food was found, or null if it wasn't.
-     */
-    private Location findFood(Field field, Location location) {
-        Iterator adjacentLocations = field.adjacentLocations(location);
-        while (adjacentLocations.hasNext()) {
-            Location where = (Location) adjacentLocations.next();
-            Animal animal = (Animal) field.getObjectAt(where);
-            if(devour(animal)) return where;
-        }
-        return null;
-    }
 }

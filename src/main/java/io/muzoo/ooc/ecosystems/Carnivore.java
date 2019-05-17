@@ -1,9 +1,6 @@
 package io.muzoo.ooc.ecosystems;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public abstract class Carnivore extends Animal{
 
@@ -35,7 +32,24 @@ public abstract class Carnivore extends Animal{
         if (getFoodLevel() <= 0) die();
     }
 
-    public boolean devour(Animal potentialPrey){
+    /**
+     * Tell the animal to look for prey adjacent to its current location.
+     *
+     * @param field    The field in which it must look.
+     * @param location Where in the field it is located.
+     * @return Where food was found, or null if it wasn't.
+     */
+    public Location findFood(Field field, Location location) {
+        Iterator adjacentLocations = field.adjacentLocations(location);
+        while (adjacentLocations.hasNext()) {
+            Location where = (Location) adjacentLocations.next();
+            Animal animal = (Animal) field.getObjectAt(where);
+            if(devour(animal)) return where;
+        }
+        return null;
+    }
+
+    private boolean devour(Animal potentialPrey){
         for(Map.Entry<Class, Integer> entry: getPreyFoodValues().entrySet()){
             Class species = entry.getKey();
             Integer foodValue = entry.getValue();
