@@ -43,8 +43,13 @@ public abstract class Carnivore extends Animal{
         Iterator adjacentLocations = field.adjacentLocations(location);
         while (adjacentLocations.hasNext()) {
             Location where = (Location) adjacentLocations.next();
-            Animal animal = (Animal) field.getObjectAt(where);
-            if(devour(animal)) return where;
+            Object tmp = field.getObjectAt(where);
+            if(!(tmp == null)) {
+                if (Animal.class.isAssignableFrom(tmp.getClass())) {
+                    Animal animal = (Animal) tmp;
+                    if (devour(animal)) return where;
+                }
+            }
         }
         return null;
     }

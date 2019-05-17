@@ -95,10 +95,10 @@ public class SimulatorView extends JFrame {
 
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
-                Animal animal = (Animal) field.getObjectAt(row, col);
-                if (animal != null) {
-                    stats.incrementCount(animal.getClass());
-                    fieldView.drawMark(col, row, getColor(animal.getClass()));
+                LifeForm lifeForm = (LifeForm) field.getObjectAt(row, col);
+                if (lifeForm != null) {
+                    stats.incrementCount(lifeForm.getClass());
+                    fieldView.drawMark(col, row, getColor(lifeForm.getClass()));
                 } else {
                     fieldView.drawMark(col, row, EMPTY_COLOR);
                 }

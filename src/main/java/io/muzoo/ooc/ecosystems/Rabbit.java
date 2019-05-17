@@ -41,7 +41,7 @@ public class Rabbit extends Herbivore{
         if (isAlive()) {
             int births = breed(rand, BREEDING_AGE, BREEDING_PROBABILITY, MAX_LITTER_SIZE);
             for (int b = 0; b < births; b++) {
-                AnimalHandler.createAnimal(Rabbit.class, updatedField, newAnimals, getLocation());
+                LifeFormHandler.createAnimal(Rabbit.class, updatedField, newAnimals, getLocation());
             }
             Location newLocation = updatedField.freeAdjacentLocation(getLocation());
             // Only transfer to the updated field if there was a free location

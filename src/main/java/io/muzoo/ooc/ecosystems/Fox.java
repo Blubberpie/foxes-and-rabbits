@@ -47,7 +47,7 @@ public class Fox extends Carnivore{
             // New foxes are born into adjacent locations.
             int births = breed(rand, BREEDING_AGE, BREEDING_PROBABILITY, MAX_LITTER_SIZE);
             for (int b = 0; b < births; b++) {
-                AnimalHandler.createAnimal(Fox.class, updatedField, newAnimals, getLocation());
+                LifeFormHandler.createAnimal(Fox.class, updatedField, newAnimals, getLocation());
             }
             // Move towards the source of food if found.
             Location newLocation = findFood(currentField, getLocation());

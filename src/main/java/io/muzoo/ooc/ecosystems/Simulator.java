@@ -23,6 +23,10 @@ public class Simulator {
     private List<Animal> animals;
     // The list of animals just born
     private List<Animal> newAnimals;
+
+    private List<Actor> actors;
+
+    private List<Actor> newActors;
     // The current state of the field.
     private Field field;
     // A second field, used to build the next stage of the simulation.
@@ -54,14 +58,17 @@ public class Simulator {
         }
         animals = new ArrayList<>();
         newAnimals = new ArrayList<>();
+        actors = new ArrayList<>();
+        newActors = new ArrayList<>();
         field = new Field(depth, width);
         updatedField = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Fox.class, Color.blue);
+        view.setColor(Fox.class, Color.cyan);
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Tiger.class, Color.red);
+        view.setColor(Hunter.class, Color.black);
 
         // Setup a valid starting point.
         reset();
@@ -93,6 +100,7 @@ public class Simulator {
     public void simulateOneStep() {
         step++;
         newAnimals.clear();
+        newActors.clear();
 
         // let all animals act
         for (Iterator<Animal> iter = animals.iterator(); iter.hasNext(); ) {
@@ -101,6 +109,10 @@ public class Simulator {
             if(!animal.isAlive()){
                 iter.remove();
             }
+        }
+        for (Iterator<Actor> iter = actors.iterator(); iter.hasNext(); ){
+            Actor actor = iter.next();
+            actor.act(field, updatedField, newActors);
         }
         // add new born animals to the list of animals
         animals.addAll(newAnimals);
@@ -121,6 +133,7 @@ public class Simulator {
     public void reset() {
         step = 0;
         animals.clear();
+        actors.clear();
         field.clear();
         updatedField.clear();
         populate(field);
@@ -138,9 +151,10 @@ public class Simulator {
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
-                AnimalHandler.createAllAnimals(field, animals, row, col);
+                LifeFormHandler.createAllLife(field, animals, actors, row, col);
             }
         }
         Collections.shuffle(animals);
+        Collections.shuffle(actors);
     }
 }

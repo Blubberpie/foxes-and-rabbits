@@ -1,5 +1,7 @@
 package io.muzoo.ooc.ecosystems;
 
+import java.util.List;
+
 public abstract class Actor extends LifeForm {
 
     // The actor's fullness which
@@ -10,6 +12,8 @@ public abstract class Actor extends LifeForm {
     // 0 = Neutral
     // 1 = Full
     private int hungerStatus;
+
+    abstract public void act(Field currentField, Field updatedField, List<Actor> actors);
 
     public void incrementFullness(int hungerBoost, int HUNGER_THRESHOLD){
         fullness += hungerBoost;
