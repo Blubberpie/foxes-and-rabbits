@@ -10,7 +10,7 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kolling
  * @version 2002.10.28
  */
-public class Rabbit extends Animal{
+public class Rabbit extends Herbivore{
     // Characteristics shared by all rabbits (static fields).
 
     // The age at which a rabbit can start to breed.
