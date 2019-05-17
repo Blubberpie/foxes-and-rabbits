@@ -21,20 +21,20 @@ public abstract class Actor extends LifeForm {
     }
 
     public void decrementFullness(int MAX_DEPLETION_RATE, int HUNGER_THRESHOLD){
-        fullness -= (MAX_DEPLETION_RATE * (1 - (getFullness() / HUNGER_THRESHOLD)));
+        fullness -= 5;
         setHungerStatus(HUNGER_THRESHOLD);
     }
 
     public void setHungerStatus(int HUNGER_THRESHOLD){
         if (fullness > (HUNGER_THRESHOLD * 0.8)) {
             this.hungerStatus = 1;
-//            this.fullness = (int) Math.round(HUNGER_THRESHOLD * 0.8);
-            this.fullness = HUNGER_THRESHOLD;
+            this.fullness = (int) Math.round(HUNGER_THRESHOLD * 0.8);
+//            this.fullness = HUNGER_THRESHOLD;
         }
         else if (fullness < (HUNGER_THRESHOLD * 0.2)) {
             this.hungerStatus = -1;
-//            this.fullness = (int) Math.round(HUNGER_THRESHOLD * 0.2);
-            this.fullness = 0;
+            this.fullness = (int) Math.round(HUNGER_THRESHOLD * 0.2);
+//            this.fullness = 0;
         }
         else this.hungerStatus = 0;
     }

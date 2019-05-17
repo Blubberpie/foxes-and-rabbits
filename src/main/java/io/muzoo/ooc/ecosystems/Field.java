@@ -171,6 +171,18 @@ public class Field {
         return locations.iterator();
     }
 
+    public Iterator getFrenzyZone(Location location, int FRENZY_ZONE_DIAMETER) {
+        int row = location.getRow();
+        int col = location.getCol();
+        LinkedList locations = new LinkedList();
+        for (int r = row; r < Math.min(row + FRENZY_ZONE_DIAMETER, depth - 1); r++) {
+            for (int c = col; c < Math.min(col + FRENZY_ZONE_DIAMETER, width - 1); c++) {
+                locations.add(new Location(r, c)); //todo: try replacing later
+            }
+        }
+        return locations.iterator();
+    }
+
     /**
      * @return The depth of the field.
      */
