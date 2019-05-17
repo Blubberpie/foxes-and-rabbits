@@ -13,13 +13,13 @@ import java.util.Random;
 public class Tiger extends Carnivore {
 
     // The age at which a tiger can start to breed.
-    private static final int BREEDING_AGE = 10;
+    private static final int BREEDING_AGE = 15;
     // The age to which a tiger can live.
-    private static final int MAX_AGE = 275;
+    private static final int MAX_AGE = 300;
     // The likelihood of a tiger breeding.
     private static final double BREEDING_PROBABILITY = 0.04;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 3;
+    private static final int MAX_LITTER_SIZE = 2;
     // A shared random number generator to control breeding.
     private static final Random rand = new Random();
 
