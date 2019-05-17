@@ -69,8 +69,8 @@ public abstract class Animal {
      * This could result in the animal's death.
      */
     public void incrementAge(int maxAge) {
-        age++;
-        if (age > maxAge) { die(); }
+        setAge(getAge() + 1);
+        if (getAge() > maxAge) { die(); }
     }
 
     public void setAge(int age){ this.age = age; }
