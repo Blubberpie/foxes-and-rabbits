@@ -14,6 +14,7 @@ public class AnimalHandler {
     private static final Map<Class, Double> CREATION_PROBABILITIES = new LinkedHashMap<Class, Double>() {{
         put(Fox.class, 0.02);
         put(Rabbit.class, 0.08);
+        put(Tiger.class, 0.006);
     }};
 
     public static void createAllAnimals(Field field, List<Animal> animals, int row, int col){

@@ -61,6 +61,7 @@ public class Simulator {
         view = new SimulatorView(depth, width);
         view.setColor(Fox.class, Color.blue);
         view.setColor(Rabbit.class, Color.orange);
+        view.setColor(Tiger.class, Color.red);
 
         // Setup a valid starting point.
         reset();
