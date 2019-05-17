@@ -137,7 +137,7 @@ public class Simulator {
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
-                AnimalFactory.createAllAnimals(field, animals, row, col);
+                AnimalHandler.createAllAnimals(field, animals, row, col);
             }
         }
         Collections.shuffle(animals);

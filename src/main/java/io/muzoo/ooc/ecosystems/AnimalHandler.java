@@ -6,18 +6,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class AnimalFactory {
+public class AnimalHandler {
 
     private static Random rand = new Random();
 
     // The probabilities animals will be created in any given grid positions.
-    private static Map<Class, Double> creationProbabilities = new LinkedHashMap<Class, Double>() {{
+    private static final Map<Class, Double> CREATION_PROBABILITIES = new LinkedHashMap<Class, Double>() {{
         put(Fox.class, 0.02);
         put(Rabbit.class, 0.08);
     }};
 
     public static void createAllAnimals(Field field, List<Animal> animals, int row, int col){
-        for(Map.Entry<Class, Double> entry: creationProbabilities.entrySet()){
+        for(Map.Entry<Class, Double> entry: CREATION_PROBABILITIES.entrySet()){
             Class species = entry.getKey();
             Double creationProbability = entry.getValue();
             if(rand.nextDouble() <= creationProbability){
