@@ -10,8 +10,6 @@ import java.util.*;
  * @version 2002.10.28
  */
 public class Fox extends Carnivore{
-    // Characteristics shared by all foxes (static fields).
-
     // The age at which a fox can start to breed.
     private static final int BREEDING_AGE = 10;
     // The age to which a fox can live.
