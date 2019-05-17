@@ -3,20 +3,11 @@ package io.muzoo.ooc.ecosystems;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Animal {
-
-    // Individual characteristics (instance fields).
-
-    // The fox's age.
-    private int age;
-    // Whether the fox is alive or not.
-    private boolean alive;
-    // The fox's position
-    private Location location;
+public abstract class Animal extends LifeForm {
 
     public Animal(){
         setAge(0);
-        this.alive = true;
+        setAlive();
     }
 
     /**
@@ -29,17 +20,6 @@ public abstract class Animal {
      * @param newAnimals A list to add newly born animals to.
      */
     abstract public void act(Field currentField, Field updatedField, List<Animal> newAnimals);
-
-    /**
-     * Check whether the animal is alive or not.
-     *
-     * @return True if the animal is still alive.
-     */
-    public boolean isAlive() { return alive; }
-
-    public void die() {
-        alive = false;
-    }
 
     /**
      * Generate a number representing the number of births,
@@ -61,36 +41,7 @@ public abstract class Animal {
      * @return true if the animal can breed, false otherwise.
      */
     private boolean canBreed(int breedingAge) {
-        return age >= breedingAge;
+        return getAge() >= breedingAge;
     }
 
-    /**
-     * Increase the age.
-     * This could result in the animal's death.
-     */
-    public void incrementAge(int maxAge) {
-        setAge(getAge() + 1);
-        if (getAge() > maxAge) { die(); }
-    }
-
-    public void setAge(int age){ this.age = age; }
-
-    /**
-     * Set the animal's location.
-     *
-     * @param row The vertical coordinate of the location.
-     * @param col The horizontal coordinate of the location.
-     */
-    public void setLocation(int row, int col) { this.location = new Location(row, col); }
-
-    /**
-     * Set the animal's location.
-     *
-     * @param location The fox's location.
-     */
-    public void setLocation(Location location) { this.location = location; }
-
-    public int getAge() { return age; }
-
-    public Location getLocation() { return location; }
 }
