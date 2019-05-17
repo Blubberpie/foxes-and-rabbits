@@ -18,11 +18,23 @@ public abstract class Actor extends LifeForm {
 
     abstract public void act(Field currentField, Field updatedField, List<Actor> actors);
 
+    /**
+     * Make the actor more full.
+     *
+     * @param hungerBoost A value with which to increment fullness
+     * @param HUNGER_THRESHOLD The fullest an actor can be
+     */
     public void incrementFullness(int hungerBoost, int HUNGER_THRESHOLD){
         fullness += hungerBoost;
         setHungerStatus(HUNGER_THRESHOLD);
     }
 
+    /**
+     * Make the actor more hungry.
+     *
+     * @param MAX_DEPLETION_RATE The rate at which to deplete fullness
+     * @param HUNGER_THRESHOLD The fullest an actor can be
+     */
     public void decrementFullness(int MAX_DEPLETION_RATE, int HUNGER_THRESHOLD){
         fullness -= 5;
         setHungerStatus(HUNGER_THRESHOLD);

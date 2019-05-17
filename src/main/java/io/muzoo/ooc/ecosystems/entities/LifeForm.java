@@ -20,6 +20,9 @@ public abstract class LifeForm {
      */
     public boolean isAlive() { return alive; }
 
+    /**
+     * Kill this life form.
+     */
     public void die() {
         alive = false;
     }

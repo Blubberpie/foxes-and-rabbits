@@ -57,6 +57,12 @@ public abstract class Carnivore extends Animal{
         return null;
     }
 
+    /**
+     * Eat its prey. Don't eat if not prey.
+     *
+     * @param potentialPrey The animal
+     * @return True if a prey has been eaten. False otherwise.
+     */
     private boolean devour(Animal potentialPrey){
         for(Map.Entry<Class, Integer> entry: getPreyFoodValues().entrySet()){
             Class species = entry.getKey();

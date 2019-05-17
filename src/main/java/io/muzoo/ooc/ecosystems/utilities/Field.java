@@ -171,6 +171,14 @@ public class Field {
         return locations.iterator();
     }
 
+    /**
+     * Generate an iterator over a square-shaped zone. All entities
+     * within the zone will be "killed".
+     *
+     * @param location The location from which to "draw" the square.
+     * @param FRENZY_ZONE_DIAMETER The maximum width of the square.
+     * @return An iterator over the zone.
+     */
     public Iterator getFrenzyZone(Location location, int FRENZY_ZONE_DIAMETER) {
         int row = location.getRow();
         int col = location.getCol();
@@ -183,6 +191,14 @@ public class Field {
         return locations.iterator();
     }
 
+    /**
+     * Generate an iterator over a giant column. All entities
+     * within the zone will be "killed".
+     *
+     * @param location The location from which to "draw" the column.
+     * @param VOLLEY_ZONE_DIAMETER The maximum width of the column.
+     * @return An iterator over the column area.
+     */
     public Iterator getVolleyZone(Location location, int VOLLEY_ZONE_DIAMETER) {
         int row = location.getRow();
         int col = location.getCol();

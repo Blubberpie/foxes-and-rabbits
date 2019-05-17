@@ -31,9 +31,9 @@ public class Simulator {
     private List<Animal> animals;
     // The list of animals just born
     private List<Animal> newAnimals;
-
+    // The list of actors in the field
     private List<Actor> actors;
-
+    // The list of actors just created
     private List<Actor> newActors;
     // The current state of the field.
     private Field field;
@@ -118,6 +118,7 @@ public class Simulator {
                 iter.remove();
             }
         }
+        // let all actors act
         for (Iterator<Actor> iter = actors.iterator(); iter.hasNext(); ){
             Actor actor = iter.next();
             actor.act(field, updatedField, newActors);

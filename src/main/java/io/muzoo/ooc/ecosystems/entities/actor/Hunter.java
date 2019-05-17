@@ -9,6 +9,24 @@ import io.muzoo.ooc.ecosystems.entities.animal.Tiger;
 
 import java.util.*;
 
+/**
+ * The hunter does four main things:
+ *
+ * If starved, it will go on a frenzy and devour
+ * everything around a certain radius.
+ *
+ * If full, it will wait until it gets hungry again.
+ *
+ * If neither of the above, it will eat whatever
+ * is closest to it, and keep going.
+ *
+ * If it is trapped, it will destroy an entire column's
+ * worth of life forms, with no fullness gain.
+ *
+ * Hunter is immortal as of this version
+ *
+ * @author Zwel Pai (5981061)
+ */
 public class Hunter extends Actor{
 
     private static final int MAX_DEPLETION_RATE = 5;
@@ -17,8 +35,8 @@ public class Hunter extends Actor{
     private static final int FRENZY_ZONE_RADIUS = FRENZY_ZONE_DIAMETER/2;
     private static final int VOLLEY_ZONE_DIAMETER = 30;
     private static final int VOLLEY_ZONE_RADIUS = VOLLEY_ZONE_DIAMETER/2;
-
     private final Random rand = new Random();
+
     // Mapping of a hunter's possible targets
     // and their hunger-filling value.
     private static Map<Class, Integer> VICTIMS;
@@ -62,6 +80,13 @@ public class Hunter extends Actor{
 
     }
 
+    /**
+     * Search and eat normally.
+     *
+     * @param field The field on which to search
+     * @param location The current location
+     * @return The location of the life form it ate
+     */
     private Location hunt(Field field, Location location){
         Iterator adjacentLocations = field.adjacentLocations(location);
         while (adjacentLocations.hasNext()) {
@@ -73,6 +98,14 @@ public class Hunter extends Actor{
         return null;
     }
 
+    /**
+     * When starved, the Hunter will devour everything in its
+     * immediate vicinity, and fill up its Hunger dramatically.
+     *
+     * @param field The field on which to search
+     * @param location The current location
+     * @return The number of kills
+     */
     private int commitFrenzy(Field field, Location location){
         int successfulKills = 0;
         Location from = new Location(Math.max(0, location.getRow() - FRENZY_ZONE_RADIUS),
@@ -86,6 +119,13 @@ public class Hunter extends Actor{
         return successfulKills;
     }
 
+    /**
+     * When trapped, the Hunter will destroy everything in a
+     * column of death, for no gains in fullness.
+     *
+     * @param field The field on which to search
+     * @param location The current location
+     */
     private void commitVolley(Field field, Location location){
         Location from = new Location(0,
                 Math.max(0, location.getCol() - VOLLEY_ZONE_RADIUS));
@@ -95,7 +135,13 @@ public class Hunter extends Actor{
         }
     }
 
-
+    /**
+     * Kill a life form at a given location.
+     *
+     * @param field The field on which to search
+     * @param where The location of the life form
+     * @return True if a kill has been made. False otherwise.
+     */
     private boolean kill(Field field, Location where){
         Object tmp = field.getObjectAt(where);
         if(!(tmp == null)){
