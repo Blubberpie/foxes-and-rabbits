@@ -1,7 +1,8 @@
-package io.muzoo.ooc.ecosystems;
+package io.muzoo.ooc.ecosystems.utilities;
+
+import io.muzoo.ooc.ecosystems.entities.LifeForm;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 import java.util.HashMap;
 

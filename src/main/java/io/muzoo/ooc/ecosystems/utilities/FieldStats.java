@@ -1,6 +1,5 @@
-package io.muzoo.ooc.ecosystems;
+package io.muzoo.ooc.ecosystems.utilities;
 
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.Iterator;
 

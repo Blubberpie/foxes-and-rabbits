@@ -1,4 +1,7 @@
-package io.muzoo.ooc.ecosystems;
+package io.muzoo.ooc.ecosystems.entities.animal;
+
+import io.muzoo.ooc.ecosystems.utilities.Field;
+import io.muzoo.ooc.ecosystems.entities.LifeForm;
 
 import java.util.List;
 import java.util.Random;

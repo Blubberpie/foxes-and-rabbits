@@ -1,4 +1,13 @@
-package io.muzoo.ooc.ecosystems;
+package io.muzoo.ooc.ecosystems.entities;
+
+import io.muzoo.ooc.ecosystems.utilities.Field;
+import io.muzoo.ooc.ecosystems.utilities.Location;
+import io.muzoo.ooc.ecosystems.entities.actor.Actor;
+import io.muzoo.ooc.ecosystems.entities.actor.Hunter;
+import io.muzoo.ooc.ecosystems.entities.animal.Animal;
+import io.muzoo.ooc.ecosystems.entities.animal.Fox;
+import io.muzoo.ooc.ecosystems.entities.animal.Rabbit;
+import io.muzoo.ooc.ecosystems.entities.animal.Tiger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;

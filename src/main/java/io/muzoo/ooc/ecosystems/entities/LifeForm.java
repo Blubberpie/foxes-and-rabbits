@@ -1,4 +1,6 @@
-package io.muzoo.ooc.ecosystems;
+package io.muzoo.ooc.ecosystems.entities;
+
+import io.muzoo.ooc.ecosystems.utilities.Location;
 
 public abstract class LifeForm {
 
