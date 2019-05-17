@@ -6,7 +6,7 @@ import java.util.Random;
 
 /**
  * A simple model of a tiger.
- * Tigers age, move, eat rabbits and tigers, and die.
+ * Tigers age, move, eat rabbits and foxes, and die.
  *
  * @author Zwel Pai
  */
