@@ -8,6 +8,8 @@ public class Hunter extends Actor{
     private static final int HUNGER_THRESHOLD = 50;
     private static final int FRENZY_ZONE_DIAMETER = 20;
     private static final int FRENZY_ZONE_RADIUS = FRENZY_ZONE_DIAMETER/2;
+    private static final int VOLLEY_ZONE_DIAMETER = 30;
+    private static final int VOLLEY_ZONE_RADIUS = VOLLEY_ZONE_DIAMETER/2;
 
     private final Random rand = new Random();
     // Mapping of a hunter's possible targets
@@ -34,21 +36,20 @@ public class Hunter extends Actor{
         }else if(getHungerStatus() == 0){
             loc = hunt(currentField, getLocation());
         }else if(getHungerStatus() == 1){
-            decrementFullness(MAX_DEPLETION_RATE, HUNGER_THRESHOLD);
+            decrementFullness(1, HUNGER_THRESHOLD);
         }
 
         if (loc == null) {  // no food found - move randomly
             loc = updatedField.freeAdjacentLocation(getLocation());
         }
+
         if (loc != null) {
             setLocation(loc);
             updatedField.place(this, loc);
         } else {
             // can neither move nor stay - overcrowding - all locations taken
 //            die(); // todo: change
-            commitFrenzy(currentField, getLocation());
-            loc = updatedField.freeAdjacentLocation(getLocation());
-//            System.out.println("AHHH");
+            commitVolley(currentField, getLocation());
         }
 
 
@@ -77,6 +78,16 @@ public class Hunter extends Actor{
         }
         return successfulKills;
     }
+
+    private void commitVolley(Field field, Location location){
+        Location from = new Location(0,
+                Math.max(0, location.getCol() - VOLLEY_ZONE_RADIUS));
+        Iterator volleyZone = field.getVolleyZone(from, VOLLEY_ZONE_DIAMETER);
+        while (volleyZone.hasNext()){
+            kill(field, (Location) volleyZone.next());
+        }
+    }
+
 
     private boolean kill(Field field, Location where){
         Object tmp = field.getObjectAt(where);

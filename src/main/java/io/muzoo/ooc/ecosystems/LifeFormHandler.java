@@ -12,17 +12,18 @@ public class LifeFormHandler {
 
     // The probabilities animals will be created in any given grid positions.
     private static final Map<Class, Double> CREATION_PROBABILITIES = new LinkedHashMap<Class, Double>() {{
-        put(Fox.class, 0.02);
-        put(Rabbit.class, 0.08);
-        put(Tiger.class, 0.006);
-        put(Hunter.class, 0.0005);
+        put(Rabbit.class, 1-0.2);
+        put(Fox.class, 1-0.06);
+        put(Tiger.class, 1-0.04);
+        put(Hunter.class, 1-0.0005);
     }};
 
     public static void createAllLife(Field field, List<Animal> animals, List<Actor> actors, int row, int col){
+        Double randDouble = rand.nextDouble();
         for(Map.Entry<Class, Double> entry: CREATION_PROBABILITIES.entrySet()){
             Class species = entry.getKey();
             Double creationProbability = entry.getValue();
-            if(rand.nextDouble() <= creationProbability){
+            if(randDouble >= creationProbability){
                 if(Animal.class.isAssignableFrom(species)) {
                     createAnimal(species, field, animals, new Location(row, col));
                 }else if(Actor.class.isAssignableFrom(species)){
