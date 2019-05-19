@@ -35,6 +35,21 @@ public abstract class Carnivore extends Animal{
         if (getFoodLevel() <= 0) die();
     }
 
+    public void eatOrDie(Field currentField, Field updatedField, Animal animal){
+        // Move towards the source of food if found.
+        Location newLocation = findFood(currentField, getLocation());
+        if (newLocation == null) {  // no food found - move randomly
+            newLocation = updatedField.freeAdjacentLocation(getLocation());
+        }
+        if (newLocation != null) {
+            setLocation(newLocation);
+            updatedField.place(animal, newLocation);
+        } else {
+            // can neither move nor stay - overcrowding - all locations taken
+            animal.die();
+        }
+    }
+
     /**
      * Tell the animal to look for prey adjacent to its current location.
      *

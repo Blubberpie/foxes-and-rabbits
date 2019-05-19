@@ -23,7 +23,7 @@ public class Tiger extends Carnivore {
     // The likelihood of a tiger breeding.
     private static final double BREEDING_PROBABILITY = 0.04;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 2;
+    private static final int MAX_LITTER_SIZE = 4;
     // A shared random number generator to control breeding.
     private static final Random rand = new Random();
 
@@ -57,18 +57,7 @@ public class Tiger extends Carnivore {
             for (int b = 0; b < births; b++) {
                 LifeFormHandler.createAnimal(Tiger.class, updatedField, newAnimals, getLocation());
             }
-            // Move towards the source of food if found.
-            Location newLocation = findFood(currentField, getLocation());
-            if (newLocation == null) {  // no food found - move randomly
-                newLocation = updatedField.freeAdjacentLocation(getLocation());
-            }
-            if (newLocation != null) {
-                setLocation(newLocation);
-                updatedField.place(this, newLocation);
-            } else {
-                // can neither move nor stay - overcrowding - all locations taken
-                die();
-            }
+            eatOrDie(currentField, updatedField, this);
         }
     }
 }

@@ -53,18 +53,7 @@ public class Fox extends Carnivore{
             for (int b = 0; b < births; b++) {
                 LifeFormHandler.createAnimal(Fox.class, updatedField, newAnimals, getLocation());
             }
-            // Move towards the source of food if found.
-            Location newLocation = findFood(currentField, getLocation());
-            if (newLocation == null) {  // no food found - move randomly
-                newLocation = updatedField.freeAdjacentLocation(getLocation());
-            }
-            if (newLocation != null) {
-                setLocation(newLocation);
-                updatedField.place(this, newLocation);
-            } else {
-                // can neither move nor stay - overcrowding - all locations taken
-                die();
-            }
+            eatOrDie(currentField, updatedField, this);
         }
     }
 }

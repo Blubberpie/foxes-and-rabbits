@@ -22,9 +22,11 @@ public class LifeFormHandler {
     // The probabilities life forms will be created in any given grid positions.
     // Being a linked hash map, this MUST be SORTED ASCENDING
     private static final Map<Class, Double> CREATION_PROBABILITIES = new LinkedHashMap<Class, Double>() {{
-        put(Hunter.class, 0.00035);
+        put(Hunter.class, 0.0003);
+//        put(Hunter.class, 0.0);
         put(Tiger.class, 0.04);
         put(Fox.class, 0.06);
+//        put(Fox.class, 0.0);
         put(Rabbit.class, 0.2);
     }};
 
