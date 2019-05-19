@@ -36,7 +36,7 @@ public abstract class Actor extends LifeForm {
      * @param HUNGER_THRESHOLD The fullest an actor can be
      */
     public void decrementFullness(int MAX_DEPLETION_RATE, int HUNGER_THRESHOLD){
-        fullness -= 5;
+        fullness -= MAX_DEPLETION_RATE;
         setHungerStatus(HUNGER_THRESHOLD);
     }
 

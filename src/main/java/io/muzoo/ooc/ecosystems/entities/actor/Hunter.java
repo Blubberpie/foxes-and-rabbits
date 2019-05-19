@@ -29,11 +29,11 @@ import java.util.*;
  */
 public class Hunter extends Actor{
 
-    private static final int MAX_DEPLETION_RATE = 5;
+    private static final int MAX_DEPLETION_RATE = 3;
     private static final int HUNGER_THRESHOLD = 50;
     private static final int FRENZY_ZONE_DIAMETER = 20;
     private static final int FRENZY_ZONE_RADIUS = FRENZY_ZONE_DIAMETER/2;
-    private static final int VOLLEY_ZONE_DIAMETER = 30;
+    private static final int VOLLEY_ZONE_DIAMETER = 20;
     private static final int VOLLEY_ZONE_RADIUS = VOLLEY_ZONE_DIAMETER/2;
     private final Random rand = new Random();
 
