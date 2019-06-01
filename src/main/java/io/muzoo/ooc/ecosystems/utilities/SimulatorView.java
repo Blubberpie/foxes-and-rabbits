@@ -1,6 +1,7 @@
 package io.muzoo.ooc.ecosystems.utilities;
 
 import io.muzoo.ooc.ecosystems.entities.LifeForm;
+import io.muzoo.ooc.ecosystems.entities.LifeFormMeta;
 
 import java.awt.*;
 import javax.swing.*;
@@ -16,7 +17,7 @@ import java.util.HashMap;
  * @author David J. Barnes and Michael Kolling
  * @version 2003.12.22
  */
-public class SimulatorView extends JFrame {
+public class SimulatorView extends JFrame implements Observer<Field, SimulatorView, Location, Object>{
     // Colors used for empty locations.
     private static final Color EMPTY_COLOR = Color.white;
 
@@ -28,8 +29,6 @@ public class SimulatorView extends JFrame {
     private JLabel stepLabel, population;
     private FieldView fieldView;
 
-    // A map for storing colors for participants in the simulation
-    private HashMap colors;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
 
@@ -38,7 +37,6 @@ public class SimulatorView extends JFrame {
      */
     public SimulatorView(int height, int width) {
         stats = new FieldStats();
-        colors = new HashMap();
 
         setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
@@ -56,27 +54,9 @@ public class SimulatorView extends JFrame {
         setVisible(true);
     }
 
-    /**
-     * Define a color to be used for a given class of animal.
-     *
-     * @param animalClass The animal's Class object.
-     * @param color       The color to be used for the given class.
-     */
-    public void setColor(Class animalClass, Color color) {
-        colors.put(animalClass, color);
-    }
+    @Override
+    public void update(Field observedField, Location location, Object object){
 
-    /**
-     * @return The color to be used for a given class of animal.
-     */
-    private Color getColor(Class animalClass) {
-        Color col = (Color) colors.get(animalClass);
-        if (col == null) {
-            // no color defined for this class
-            return UNKNOWN_COLOR;
-        } else {
-            return col;
-        }
     }
 
     /**
@@ -99,7 +79,8 @@ public class SimulatorView extends JFrame {
                 LifeForm lifeForm = (LifeForm) field.getObjectAt(row, col);
                 if (lifeForm != null) {
                     stats.incrementCount(lifeForm.getClass());
-                    fieldView.drawMark(col, row, getColor(lifeForm.getClass()));
+                    Color color = LifeFormMeta.valueOf(lifeForm.getClass().getSimpleName().toUpperCase()).getColor();
+                    fieldView.drawMark(col, row, color);
                 } else {
                     fieldView.drawMark(col, row, EMPTY_COLOR);
                 }

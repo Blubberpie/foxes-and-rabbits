@@ -1,6 +1,7 @@
 package io.muzoo.ooc.ecosystems.entities;
 
 import io.muzoo.ooc.ecosystems.utilities.Location;
+import io.muzoo.ooc.ecosystems.utilities.Observer;
 
 public abstract class LifeForm {
 

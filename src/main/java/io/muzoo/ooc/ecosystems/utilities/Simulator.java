@@ -2,14 +2,9 @@ package io.muzoo.ooc.ecosystems.utilities;
 
 import io.muzoo.ooc.ecosystems.entities.*;
 import io.muzoo.ooc.ecosystems.entities.actor.Actor;
-import io.muzoo.ooc.ecosystems.entities.actor.Hunter;
 import io.muzoo.ooc.ecosystems.entities.animal.Animal;
-import io.muzoo.ooc.ecosystems.entities.animal.Fox;
-import io.muzoo.ooc.ecosystems.entities.animal.Rabbit;
-import io.muzoo.ooc.ecosystems.entities.animal.Tiger;
 
 import java.util.*;
-import java.awt.Color;
 
 /**
  * A simple predator-prey simulator, based on a field containing
@@ -73,10 +68,6 @@ public class Simulator {
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        for(LifeFormMeta lifeFormMeta : LifeFormMeta.values()){
-            view.setColor(lifeFormMeta.getSpecies(), lifeFormMeta.getColor());
-        }
-
         // Setup a valid starting point.
         reset();
     }

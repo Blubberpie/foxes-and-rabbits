@@ -11,7 +11,7 @@ import java.util.Iterator;
  * @author David J. Barnes and Michael Kolling
  * @version 2002.04.23
  */
-public class FieldStats {
+public class FieldStats{
     // Counters for each type of entity (fox, rabbit, etc.) in the simulation.
     private HashMap counters;
     // Whether the counters are currently up to date.
