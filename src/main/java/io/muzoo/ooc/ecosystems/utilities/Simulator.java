@@ -73,10 +73,9 @@ public class Simulator {
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Fox.class, Color.cyan);
-        view.setColor(Rabbit.class, Color.orange);
-        view.setColor(Tiger.class, Color.red);
-        view.setColor(Hunter.class, Color.black);
+        for(LifeFormMeta lifeFormMeta : LifeFormMeta.values()){
+            view.setColor(lifeFormMeta.getSpecies(), lifeFormMeta.getColor());
+        }
 
         // Setup a valid starting point.
         reset();

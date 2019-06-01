@@ -10,23 +10,12 @@ import io.muzoo.ooc.ecosystems.entities.animal.Rabbit;
 import io.muzoo.ooc.ecosystems.entities.animal.Tiger;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class LifeFormHandler {
 
     private static Random rand = new Random();
-
-    // The probabilities life forms will be created in any given grid positions.
-    // Being a linked hash map, this MUST be SORTED ASCENDING
-    private static final Map<Class, Double> CREATION_PROBABILITIES = new LinkedHashMap<Class, Double>() {{
-        put(Hunter.class, 0.00025);
-        put(Tiger.class, 0.045);
-        put(Fox.class, 0.06);
-        put(Rabbit.class, 0.2);
-    }};
 
     /**
      * Iterate through every life form and place each on the field,
@@ -40,9 +29,9 @@ public class LifeFormHandler {
      */
     public static void createAllLife(Field field, List<Animal> animals, List<Actor> actors, int row, int col){
         Double randDouble = rand.nextDouble();
-        for(Map.Entry<Class, Double> entry: CREATION_PROBABILITIES.entrySet()){
-            Class species = entry.getKey();
-            Double creationProbability = entry.getValue();
+        for(LifeFormMeta lifeFormMeta : LifeFormMeta.values()){
+            Class species = lifeFormMeta.getSpecies();
+            Double creationProbability = lifeFormMeta.getCreationProbability();
             if(randDouble <= creationProbability){
                 if(Animal.class.isAssignableFrom(species)) {
                     createAnimal(species, field, animals, new Location(row, col));
