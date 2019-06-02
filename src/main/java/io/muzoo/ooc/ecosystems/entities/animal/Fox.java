@@ -1,10 +1,11 @@
 package io.muzoo.ooc.ecosystems.entities.animal;
 
 import io.muzoo.ooc.ecosystems.utilities.Field;
-import io.muzoo.ooc.ecosystems.utilities.Location;
 import io.muzoo.ooc.ecosystems.entities.LifeFormHandler;
 
 import java.util.*;
+
+import static io.muzoo.ooc.ecosystems.entities.LifeFormMeta.FOX;
 
 /**
  * A simple model of a fox.
@@ -15,14 +16,6 @@ import java.util.*;
  */
 public class Fox extends Carnivore{
 
-    // The age at which a fox can start to breed.
-    private static final int BREEDING_AGE = 10;
-    // The age to which a fox can live.
-    private static final int MAX_AGE = 150;
-    // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.065;
-    // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 4;
     // A shared random number generator to control breeding.
     private static final Random rand = new Random();
 
@@ -33,7 +26,7 @@ public class Fox extends Carnivore{
      * @param randomAge If true, the fox will have random age and hunger level.
      */
     public Fox(boolean randomAge) {
-        super(randomAge, MAX_AGE, rand,
+        super(randomAge, FOX.getMaxAge(), rand,
                 new LinkedHashMap<Class, Integer>(){{ put(Rabbit.class, 4); }});
     }
 
@@ -45,13 +38,13 @@ public class Fox extends Carnivore{
      * @param newAnimals A list to add newly born animals to.
      */
     public void act(Field currentField, Field updatedField, List<Animal> newAnimals) {
-        incrementAge(MAX_AGE);
+        incrementAge(FOX.getMaxAge());
         incrementHunger();
         if (isAlive()) {
             // New foxes are born into adjacent locations.
-            int births = breed(rand, BREEDING_AGE, BREEDING_PROBABILITY, MAX_LITTER_SIZE);
+            int births = breed(rand, FOX.getBreedingAge(), FOX.getBreedingProbability(), FOX.getMaxLitterSize());
             for (int b = 0; b < births; b++) {
-                LifeFormHandler.createAnimal(Fox.class, updatedField, newAnimals, getLocation());
+                LifeFormHandler.createAnimal(FOX.getSpecies(), updatedField, newAnimals, getLocation());
             }
             eatOrDie(currentField, updatedField, this);
         }

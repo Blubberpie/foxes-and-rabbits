@@ -12,7 +12,7 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kolling
  * @version 2002.04.09
  */
-public class Field extends Observable<Field, SimulatorView, Location, Object>{
+public class Field {
     private static final Random rand = new Random();
 
     // The depth and width of the field.

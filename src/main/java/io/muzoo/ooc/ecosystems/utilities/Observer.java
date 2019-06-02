@@ -1,8 +1,6 @@
 package io.muzoo.ooc.ecosystems.utilities;
 
-public interface Observer<S extends Observable<S, O, A, B>,
-                          O extends Observer<S, O, A, B>,
-                          A, B> {
+public interface Observer {
 
-    void update(S subject, A argument, B argument2);
+    void update(Observable subject);
 }

@@ -1,12 +1,13 @@
 package io.muzoo.ooc.ecosystems.entities.animal;
 
 import io.muzoo.ooc.ecosystems.utilities.Field;
-import io.muzoo.ooc.ecosystems.utilities.Location;
 import io.muzoo.ooc.ecosystems.entities.LifeFormHandler;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
+
+import static io.muzoo.ooc.ecosystems.entities.LifeFormMeta.*;
 
 /**
  * A simple model of a tiger.
@@ -16,14 +17,6 @@ import java.util.Random;
  */
 public class Tiger extends Carnivore {
 
-    // The age at which a tiger can start to breed.
-    private static final int BREEDING_AGE = 15;
-    // The age to which a tiger can live.
-    private static final int MAX_AGE = 300;
-    // The likelihood of a tiger breeding.
-    private static final double BREEDING_PROBABILITY = 0.04;
-    // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 4;
     // A shared random number generator to control breeding.
     private static final Random rand = new Random();
 
@@ -34,10 +27,10 @@ public class Tiger extends Carnivore {
      * @param randomAge If true, the tiger will have random age and hunger level.
      */
     public Tiger(boolean randomAge) {
-        super(randomAge, MAX_AGE, rand,
+        super(randomAge, TIGER.getMaxAge(), rand,
                 new LinkedHashMap<Class, Integer>(){{
-                    put(Rabbit.class, 4);
-                    put(Fox.class, 8);
+                    put(RABBIT.getSpecies(), 4);
+                    put(RABBIT.getSpecies(), 8);
         }});
     }
 
@@ -49,13 +42,13 @@ public class Tiger extends Carnivore {
      * @param newAnimals A list to add newly born animals to.
      */
     public void act(Field currentField, Field updatedField, List<Animal> newAnimals) {
-        incrementAge(MAX_AGE);
+        incrementAge(TIGER.getMaxAge());
         incrementHunger();
         if (isAlive()) {
             // New tigers are born into adjacent locations.
-            int births = breed(rand, BREEDING_AGE, BREEDING_PROBABILITY, MAX_LITTER_SIZE);
+            int births = breed(rand, TIGER.getBreedingAge(), TIGER.getBreedingProbability(), TIGER.getMaxLitterSize());
             for (int b = 0; b < births; b++) {
-                LifeFormHandler.createAnimal(Tiger.class, updatedField, newAnimals, getLocation());
+                LifeFormHandler.createAnimal(TIGER.getSpecies(), updatedField, newAnimals, getLocation());
             }
             eatOrDie(currentField, updatedField, this);
         }

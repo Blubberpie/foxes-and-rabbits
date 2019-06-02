@@ -17,7 +17,7 @@ import java.util.HashMap;
  * @author David J. Barnes and Michael Kolling
  * @version 2003.12.22
  */
-public class SimulatorView extends JFrame implements Observer<Field, SimulatorView, Location, Object>{
+public class SimulatorView extends JFrame {
     // Colors used for empty locations.
     private static final Color EMPTY_COLOR = Color.white;
 
@@ -35,7 +35,7 @@ public class SimulatorView extends JFrame implements Observer<Field, SimulatorVi
     /**
      * Create a view of the given width and height.
      */
-    public SimulatorView(int height, int width) {
+    public SimulatorView(int height, int width, Simulator simulator) {
         stats = new FieldStats();
 
         setTitle("Fox and Rabbit Simulation");
@@ -46,17 +46,18 @@ public class SimulatorView extends JFrame implements Observer<Field, SimulatorVi
 
         fieldView = new FieldView(height, width);
 
+//         // WHEN IMPLEMENTING OBSERVERS
+//         // graphs, histograms, etc...
+//         // implement update() inside the observers
+        
+//        simulator.addObserver();
+
         Container contents = getContentPane();
         contents.add(stepLabel, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
         pack();
         setVisible(true);
-    }
-
-    @Override
-    public void update(Field observedField, Location location, Object object){
-
     }
 
     /**

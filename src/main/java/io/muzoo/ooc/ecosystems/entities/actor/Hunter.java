@@ -3,11 +3,10 @@ package io.muzoo.ooc.ecosystems.entities.actor;
 import io.muzoo.ooc.ecosystems.utilities.Field;
 import io.muzoo.ooc.ecosystems.utilities.Location;
 import io.muzoo.ooc.ecosystems.entities.animal.Animal;
-import io.muzoo.ooc.ecosystems.entities.animal.Fox;
-import io.muzoo.ooc.ecosystems.entities.animal.Rabbit;
-import io.muzoo.ooc.ecosystems.entities.animal.Tiger;
 
 import java.util.*;
+
+import static io.muzoo.ooc.ecosystems.entities.LifeFormMeta.*;
 
 /**
  * The hunter does four main things:
@@ -45,9 +44,9 @@ public class Hunter extends Actor{
         setFullness(rand.nextInt(HUNGER_THRESHOLD + 1));
         setHungerStatus(HUNGER_THRESHOLD);
         VICTIMS = new LinkedHashMap<Class, Integer>(){{
-            put(Tiger.class, 15);
-            put(Fox.class, 8);
-            put(Rabbit.class, 4);
+            put(TIGER.getSpecies(), 15);
+            put(FOX.getSpecies(), 8);
+            put(RABBIT.getSpecies(), 4);
         }};
     }
 

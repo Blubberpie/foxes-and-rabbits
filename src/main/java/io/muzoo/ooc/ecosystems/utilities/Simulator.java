@@ -13,7 +13,7 @@ import java.util.*;
  * @author David J. Barnes and Michael Kolling
  * @version 2002.10.28
  */
-public class Simulator {
+public class Simulator extends Observable{
 
     // The private static final variables represent 
     // configuration information for the simulation.
@@ -67,7 +67,7 @@ public class Simulator {
         updatedField = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
-        view = new SimulatorView(depth, width);
+        view = new SimulatorView(depth, width, this);
         // Setup a valid starting point.
         reset();
     }
@@ -155,5 +155,10 @@ public class Simulator {
         }
         Collections.shuffle(animals);
         Collections.shuffle(actors);
+    }
+
+    public void notifyObservers(){
+        setChanged();
+        super.notifyObservers();
     }
 }
